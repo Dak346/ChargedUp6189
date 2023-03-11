@@ -1,6 +1,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -15,6 +17,9 @@ public class Robot extends TimedRobot {
     private Drivetrain drivetrain;
     private Arm arm;
 
+    /**
+     * start of the user written robot code, initializing the controller and the subsystems
+     */
     public Robot() {
         driver = new XboxController(Constants.kDriverPort);
 
@@ -24,6 +29,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        UsbCamera camera = CameraServer.startAutomaticCapture();
+        camera.setResolution(Constants.kCameraWidth, Constants.kCameraHeight);
+        camera.setFPS(Constants.kCameraFramesPerSecond);
 
     }
 
@@ -34,7 +42,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        getAuto().schedule();
+        getAutonomousCommand().schedule();
     }
 
     @Override
@@ -49,7 +57,15 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
+        // TODO finish direction testing for rear right and then comment the line below out
         drivetrainMotorDirectionTesting();
+
+        // TODO uncomment these three lines below after direction testing and uncomment initDifferentialDrive
+        //      call in Drivetrain.java line 25
+
+        // driveControl();
+        // wristControl();
+        // intakeControl();
     }
 
     @Override
@@ -60,6 +76,10 @@ public class Robot extends TimedRobot {
         drivetrain.stopRearRight();
     }
 
+    /**
+     * testing code for direction of drive motors to ensure that they are going the right direction
+     * before they are used in the differential drive
+     */
     public void drivetrainMotorDirectionTesting() {
         // drivetrain.runFrontLeftForward();
         // drivetrain.runFrontRightForward();
@@ -68,7 +88,7 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * teleop drive control
+     * teleop drivetrain control
      */
     public void driveControl() {
         double throttle, turn;
@@ -88,6 +108,9 @@ public class Robot extends TimedRobot {
         drivetrain.drive(throttle, turn);
     }
 
+    /**
+     * teleop wrist control
+     */
     public void wristControl() {
         if (driver.getXButton()) {
             arm.setWristPower(Constants.kDefaultWristPower);
@@ -100,6 +123,9 @@ public class Robot extends TimedRobot {
         }
     }
 
+    /**
+     * teleop intake control
+     */
     public void intakeControl() {
         if (driver.getAButton()) {
             arm.intake(Constants.kDefaultIntakePower);
@@ -112,10 +138,16 @@ public class Robot extends TimedRobot {
         }
     }
 
-    public CommandBase getAuto() { 
+    /**
+     * Autonomous command
+     */
+    public CommandBase getAutonomousCommand() { 
         return new BestAutoEver(drivetrain, arm);
     }
 
+    /**
+     * Control mode enum to define how the driver inputs are read
+     */
     public enum ControlMode {
         GTA, Sticks;
     }

@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.Robot.ControlMode;
+import frc.robot.subsystems.Arm.WristMotorController;
 import frc.robot.subsystems.Drivetrain.DriveMode;
 
 public class Constants {
@@ -16,6 +17,10 @@ public class Constants {
     public static final boolean kCurvatureTurnInPlace = true;
     public static final double kDefaultIntakePower = 0.10;
     public static final double kDefaultWristPower = 0.30;
+    public static final WristMotorController kWristController = WristMotorController.TalonSRX;
+    public static final int kCameraWidth = 0;
+    public static final int kCameraHeight = 0;
+    public static final int kCameraFramesPerSecond = 0;
     
     public static final int kFrontLeftDriveTalonID = 01;
     public static final boolean kFrontLeftDriveTalonInverted = false;
@@ -26,8 +31,8 @@ public class Constants {
     public static final int kRearRightDriveTalonID = 25;
     public static final boolean kRearRightDriveTalonInverted = false;
     
-    public static final int kWristTalonID = 31;
-    public static final boolean kWristTalonInverted = false;
+    public static final int kWristID = 31;
+    public static final boolean kWristInverted = false;
     public static final int kLeftIntakeTalonID = 34;
     public static final boolean kLeftIntakeTalonInverted = true;
     public static final int kRightIntakeTalonID = 02;
