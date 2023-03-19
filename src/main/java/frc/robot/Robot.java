@@ -91,6 +91,9 @@ public class Robot extends TimedRobot {
                 break;
         }
 
+        if (Constants.kInvertThrottleAxis) throttle *= -1;
+        if (Constants.kInvertTurnAxis) turn *= -1;
+
         drivetrain.drive(throttle, turn);
     }
 
