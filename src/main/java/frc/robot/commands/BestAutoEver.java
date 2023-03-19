@@ -9,18 +9,18 @@ import frc.robot.subsystems.Drivetrain;
 public class BestAutoEver extends SequentialCommandGroup {
     public BestAutoEver(Drivetrain drivetrain, Arm arm) {
         super(
-            new RunIntake(arm, -0.10),
+            new RunIntake(arm, -0.40),
             new WaitCommand(0.50),
             new StopIntake(arm),
             Commands.parallel(
                 Commands.sequence(
-                    new RunWrist(arm, -0.10),
+                    new RunWrist(arm, -0.35),
                     new WaitCommand(1),
                     new StopWrist(arm),
                     new RunIntake(arm, 0.1)
                 ),
                 Commands.sequence(
-                    new AutoDrive(drivetrain, 0.6).withTimeout(3), // timed drive for 3 seconds
+                    new AutoDrive(drivetrain, 0.6).withTimeout(3.5), // timed drive for 3 seconds
                     new StopDrive(drivetrain))
             )
         );

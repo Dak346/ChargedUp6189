@@ -58,22 +58,22 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         // TODO finish direction testing for rear right and then comment the line below out
-        drivetrainMotorDirectionTesting();
+        //drivetrainMotorDirectionTesting();
 
         // TODO uncomment these three lines below after direction testing and uncomment initDifferentialDrive
         //      call in Drivetrain.java line 25
 
-        // driveControl();
-        // wristControl();
-        // intakeControl();
+        driveControl();
+        wristControl();
+        intakeControl();
     }
 
     @Override
     public void teleopExit() {
-        drivetrain.stopFrontLeft();
-        drivetrain.stopFrontRight();
-        drivetrain.stopRearLeft();
-        drivetrain.stopRearRight();
+        //drivetrain.stopFrontLeft();
+        //drivetrain.stopFrontRight();
+        //drivetrain.stopRearLeft();
+        //drivetrain.stopRearRight();
     }
 
     /**
@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
         // drivetrain.runFrontLeftForward();
         // drivetrain.runFrontRightForward();
         // drivetrain.runRearLeftForward();
-         drivetrain.runRearRightForward();
+        // drivetrain.runRearRightForward();
     }
 
     /**
