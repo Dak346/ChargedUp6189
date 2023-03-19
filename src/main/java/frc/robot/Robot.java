@@ -3,19 +3,25 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.AutoBalance;
 import frc.robot.commands.BestAutoEver;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.util.AccelerometerWrapper;
 
 public class Robot extends TimedRobot {
 
     private XboxController driver;
     private Drivetrain drivetrain;
     private Arm arm;
+
+    @SuppressWarnings("unused")
+    private AccelerometerWrapper accelerometer;
 
     /**
      * start of the user written robot code, initializing the controller and the subsystems
@@ -25,6 +31,7 @@ public class Robot extends TimedRobot {
 
         drivetrain = new Drivetrain();
         arm = new Arm();
+        accelerometer = new AccelerometerWrapper(new BuiltInAccelerometer());
     }
 
     @Override
@@ -32,7 +39,6 @@ public class Robot extends TimedRobot {
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(Constants.kCameraWidth, Constants.kCameraHeight);
         camera.setFPS(Constants.kCameraFramesPerSecond);
-
     }
 
     @Override
@@ -57,12 +63,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
-        // TODO finish direction testing for rear right and then comment the line below out
-        //drivetrainMotorDirectionTesting();
-
-        // TODO uncomment these three lines below after direction testing and uncomment initDifferentialDrive
-        //      call in Drivetrain.java line 25
-
         driveControl();
         wristControl();
         intakeControl();
@@ -70,21 +70,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopExit() {
-        //drivetrain.stopFrontLeft();
-        //drivetrain.stopFrontRight();
-        //drivetrain.stopRearLeft();
-        //drivetrain.stopRearRight();
-    }
 
-    /**
-     * testing code for direction of drive motors to ensure that they are going the right direction
-     * before they are used in the differential drive
-     */
-    public void drivetrainMotorDirectionTesting() {
-        // drivetrain.runFrontLeftForward();
-        // drivetrain.runFrontRightForward();
-        // drivetrain.runRearLeftForward();
-        // drivetrain.runRearRightForward();
     }
 
     /**
@@ -131,7 +117,7 @@ public class Robot extends TimedRobot {
             arm.intake(Constants.kDefaultIntakePower);
         }
         else if (driver.getBButton()) {
-            arm.intake(-Constants.kDefaultIntakePower);
+            arm.outtake(Constants.kDefaultIntakePower);
         }
         else {
             arm.stopIntake();
@@ -142,6 +128,8 @@ public class Robot extends TimedRobot {
      * Autonomous command
      */
     public CommandBase getAutonomousCommand() { 
+        // TODO if would like to test charge station auto run the line below instead and comment out the other one so you can still use it
+        // return new AutoBalance(drivetrain, accelerometer);
         return new BestAutoEver(drivetrain, arm);
     }
 

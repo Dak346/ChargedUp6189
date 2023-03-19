@@ -22,7 +22,7 @@ public class Drivetrain extends SubsystemBase {
      */
     public Drivetrain() {
         initMotors();
-        // initDifferentialDrive(); // TODO uncomment when correct directions are found
+        initDifferentialDrive();
         mode = kDriveMode;
         maxThrottle = kDefaultMaxThrottle;
         maxTurn = kDefaultMaxTurn;
@@ -86,17 +86,6 @@ public class Drivetrain extends SubsystemBase {
     } 
 
     /**
-     * Used for testing the direction of the front left motor; only for testing purposes!
-     */
-    public void runFrontLeftForward() {
-        if (drive == null) {
-            frontLeft.set(0.30);
-        } else {
-            throw new IllegalStateException("Please remove calls to runFrontLeftForward()");
-        }
-    }
-
-    /**
      * stops the front left motor; only for testing purposes! remove any calls once direction is verified
      */
     public void stopFrontLeft() {
@@ -104,17 +93,6 @@ public class Drivetrain extends SubsystemBase {
             frontLeft.set(0);
         } else {
             throw new IllegalStateException("Please remove calls to stopFrontLeft(); use stop() instead");
-        }
-    }
-
-    /**
-     * Used for testing the direction of the front right motor; only for testing purposes!
-     */
-    public void runFrontRightForward() {
-        if (drive == null) {
-            frontRight.set(0.30);
-        } else {
-            throw new IllegalStateException("Please remove calls to runFrontRightForward()");
         }
     }
 
@@ -130,17 +108,6 @@ public class Drivetrain extends SubsystemBase {
     }
 
     /**
-     * Used for testing the direction of the rear left motor; only for testing purposes!
-     */
-    public void runRearLeftForward() {
-        if (drive == null) {
-            rearLeft.set(0.30);
-        } else {
-            throw new IllegalStateException("Please remove calls to runRearLeftForward()");
-        }
-    }
-
-    /**
      * stops the rear left motor; only for testing purposes! remove any calls once direction is verified
      */
     public void stopRearLeft() {
@@ -148,17 +115,6 @@ public class Drivetrain extends SubsystemBase {
             rearLeft.set(0);
         } else {
             throw new IllegalStateException("Please remove calls to stopRearLeft(); use stop() instead");
-        }
-    }
-
-    /**
-     * Used for testing the direction of the rear right motor; only for testing purposes!
-     */
-    public void runRearRightForward() {
-        if (drive == null) {
-            rearRight.set(0.30);
-        } else {
-            throw new IllegalStateException("Please remove calls to runRearRightForward()");
         }
     }
 
@@ -196,7 +152,6 @@ public class Drivetrain extends SubsystemBase {
     /**
      * Initializes the differential drive for the drivetrain
      */
-    @SuppressWarnings("unused")
     private void initDifferentialDrive() {
         left = new MotorControllerGroup(frontLeft, rearLeft);
         right = new MotorControllerGroup(frontRight, rearRight);
