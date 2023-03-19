@@ -41,9 +41,14 @@ public class Arm extends SubsystemBase {
      * sets the intake power
      */
     public void intake(double power) {
-        // TODO consider splitting into two methods intake and outtake where direction
-        //      is determined by the method called
-        leftIntake.set(power);
+        leftIntake.set(Math.abs(power));
+    }
+
+    /**
+     * sets the intake to some outtaking power regardless of the sign of power
+     */
+    public void outtake(double power) {
+        leftIntake.set(-Math.abs(power));
     }
 
     /**

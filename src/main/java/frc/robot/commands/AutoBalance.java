@@ -1,3 +1,4 @@
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -6,11 +7,23 @@ import frc.robot.util.AccelerometerWrapper;
 
 public class AutoBalance extends CommandBase {
 
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                             VALUES TO TUNE                             //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
     private static final double kFastDriveSpeed = 0.4;
     private static final double kSlowDriveSpeed = 0.2;
     private static final double kDebounceTime = 0.2;
     private static final double kOnChargeStationDegree = 13.0;
     private static final double kLevelDegree = 6.0;
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                           END VALUES TO TUNE                           //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
 
     private Drivetrain drivetrain;
     private AccelerometerWrapper accelerometer;
@@ -35,6 +48,10 @@ public class AutoBalance extends CommandBase {
         drivetrain.autoDrive(calculateDriveSpeed());
     }
 
+    /**
+     * Calculates the speed to run the drivetrain at
+     * @return
+     */
     private double calculateDriveSpeed() {
         switch (state) {
             // drive forwards to approach station, exit when tilt is detected
@@ -81,6 +98,11 @@ public class AutoBalance extends CommandBase {
 
     }
 
+    /**
+     * seconds to number of loop cycles
+     * @param time
+     * @return
+     */
     private int secondsToTicks(double time) {
         return (int) (time * 50);
     }
