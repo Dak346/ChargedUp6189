@@ -11,13 +11,13 @@ public class Constants {
     // drive controls and stuff
     public static final DriveMode kDriveMode = DriveMode.Curvature;
     public static final ControlMode kControlMode = ControlMode.GTA;
-    public static final double kDefaultMaxThrottle = 0.70;
-    public static final double kDefaultMaxTurn = 0.55;
+    public static final double kDefaultMaxThrottle = 0.80;
+    public static final double kDefaultMaxTurn = -0.55;
     public static final boolean kSquareArcadeInputs = false;
     public static final boolean kCurvatureTurnInPlace = true;
-    public static final double kDefaultIntakePower = 0.10;
-    public static final double kDefaultWristPower = 0.30;
-    public static final WristMotorController kWristController = WristMotorController.TalonSRX;
+    public static final double kDefaultIntakePower = 0.20; //.2
+    public static final double kDefaultWristPower = 0.60;
+    public static final WristMotorController kWristController = WristMotorController.SparkMax;
     public static final int kCameraWidth = 0;
     public static final int kCameraHeight = 0;
     public static final int kCameraFramesPerSecond = 0;
@@ -29,7 +29,7 @@ public class Constants {
     public static final int kRearLeftDriveTalonID = 04;
     public static final boolean kRearLeftDriveTalonInverted = false;
     public static final int kRearRightDriveTalonID = 25;
-    public static final boolean kRearRightDriveTalonInverted = false;
+    public static final boolean kRearRightDriveTalonInverted = true;
     
     public static final int kWristID = 31;
     public static final boolean kWristInverted = false;
