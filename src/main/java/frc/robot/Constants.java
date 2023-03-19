@@ -11,8 +11,10 @@ public class Constants {
     // drive controls and stuff
     public static final DriveMode kDriveMode = DriveMode.Curvature;
     public static final ControlMode kControlMode = ControlMode.GTA;
+    public static final boolean kInvertThrottleAxis = false;
     public static final double kDefaultMaxThrottle = 0.80;
-    public static final double kDefaultMaxTurn = -0.55;
+    public static final boolean kInvertTurnAxis = true;
+    public static final double kDefaultMaxTurn = 0.55;
     public static final boolean kSquareArcadeInputs = false;
     public static final boolean kCurvatureTurnInPlace = true;
     public static final double kDefaultIntakePower = 0.20; //.2
