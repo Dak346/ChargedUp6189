@@ -122,6 +122,9 @@ public class Robot extends TimedRobot {
         else if (driver.getBButton()) {
             arm.outtake(Constants.kDefaultIntakePower);
         }
+        else if (driver.getRightBumper()) {
+            arm.outtake(Constants.kDefaultShootPower);
+        }
         else {
             arm.stopIntake();
         }
